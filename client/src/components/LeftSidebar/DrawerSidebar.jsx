@@ -34,7 +34,7 @@ function DrawerSidebar({toggleDrawer,toggleDrawerSidebar}) {
           <div className="icon_Sidebar_div">
             <p>
               <img
-                src={shorts}
+                src={shorts} alt='shorts'
                 width={22}
                 className={"icon_sidebar"}
                 style={{ margin: "auto 0.7rem" }}
@@ -74,7 +74,7 @@ function DrawerSidebar({toggleDrawer,toggleDrawerSidebar}) {
               <div className="text_sidebar_icon">History</div>
             </p>
           </NavLink>
-          <NavLink to={'/yourvideos'} className="icon_Sidebar_div">
+          <NavLink to={'/yourvideo'} className="icon_Sidebar_div">
             <p>
               <AiFillPlaySquare
                 size={22}
