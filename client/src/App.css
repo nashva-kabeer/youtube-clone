@@ -21,3 +21,19 @@
     border-top: 2px solid rgb(128,128,128,0.45);
     overflow-y: auto;
 }
+.video_box_app{
+    width: 21rem;
+    height: 17rem;
+    margin-bottom: 1rem;
+    border: 2px solid transparent;
+}
+video{
+    background-color: rgb(8,8,8,0.662);
+}
+.dot{
+    height: 4px;
+    width: 4px;
+    background-color: white;
+    border-radius: 100%;
+    margin: auto 0.5rem;
+}
