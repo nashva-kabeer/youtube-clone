@@ -1,6 +1,7 @@
 import React from 'react';
 import vid from '../../components/Video/vid.mp4'
 import './VideoPage.css';
+import LikeWatchLaterSaveBtns from './LikeWatchLaterSaveBtns';
 
 function VideoPage() {
   return (
@@ -18,6 +19,7 @@ function VideoPage() {
                         <p className="video_title_videoPage">Title</p>
                         <div className="viewv_date_btn_videoPage">
                             <div className="views_videoPage">5 views <div className="dot"></div>uploaded 1 year ago</div>
+                            <LikeWatchLaterSaveBtns/>
                         </div>
                     </div>
                 </div>
