@@ -7,15 +7,20 @@ import {IoMdNotificationsOutline} from 'react-icons/io';
 import {BiUserCircle} from 'react-icons/bi';
 import { GoogleLogin } from "react-google-login";
 import {gapi} from 'gapi-script';
+import {useDispatch, useSelector} from 'react-redux';
+import { login } from '../../actions/auth';
 
 function Nav({toggleDrawer}) {
-    const CurrentUser = null;
+    //const CurrentUser = null;
     //   const CurrentUser = {
     //     result: {
     //     email: "abzxy50312@gmail.com",
     //     joinedOn: "2222-07-15T09:57:23.489Z",
     // },
 //   };
+
+const CurrentUser = useSelector(state => state.currentUserReducer)
+console.log(CurrentUser)
 
 useEffect(()=>{
     function start (){
@@ -27,9 +32,12 @@ useEffect(()=>{
     gapi.load("client:auth2",start)
 },[]);
 
+const dispatch = useDispatch();
+
 const onSuccess = (response) =>{
     const Email = response?.profileObj.email;
-    console.log(Email)
+    console.log(Email);
+    dispatch(login({email:Email}))
 }
 
 const onFailure = (response) =>{
@@ -78,11 +86,14 @@ const onFailure = (response) =>{
             ) : (
                 <>
                 <GoogleLogin clientId="248374223563-bv9tmktrv3pfgtfi3pt7hpb2bkg14eep.apps.googleusercontent.com" 
-                onSuccess={onSuccess} onFailure={onFailure}/>
-                <p className="Auth_btn">
+                onSuccess={onSuccess} onFailure={onFailure}
+                render = {(renderProps) => (
+                    <p className="Auth_btn" onClick={renderProps.onClick}>
                 <BiUserCircle size={22}/>
                 <b>Sign in </b>
                 </p>
+                )}
+                />
                 </>
             )
             }

@@ -24,7 +24,7 @@ function Comments() {
   return (
     <>
     <form className='comment_sub_form_comments' onSubmit={handleOnSubmit}>
-        <input type='text' onChange={(e)=>setCommentText(e.target.value)} placeholder='add comment..' className='comment_ibox'/>
+        <input type='text' onChange={(e)=>setCommentText(e.target.value)} placeholder='add comment..' value={CommentText} className='comment_ibox'/>
         <input type='submit' value="add" className='comment_add_btn_comments'/>
     </form>
     <div className="display_comment_container">
