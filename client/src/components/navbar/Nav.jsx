@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import './Nav.css';
 import logo from './logo.ico';
 import SearchBar from './searchbar/SearchBar';
@@ -9,17 +9,20 @@ import { GoogleLogin } from "react-google-login";
 import {gapi} from 'gapi-script';
 import {useDispatch, useSelector} from 'react-redux';
 import { login } from '../../actions/auth';
+import Auth from '../../pages/Auth/Auth';
 
 function Nav({toggleDrawer}) {
-    //const CurrentUser = null;
-    //   const CurrentUser = {
-    //     result: {
-    //     email: "abzxy50312@gmail.com",
-    //     joinedOn: "2222-07-15T09:57:23.489Z",
-    // },
-//   };
 
-const CurrentUser = useSelector(state => state.currentUserReducer)
+    const [AuthBtn, setAuthBtn] = useState(false)
+    //const CurrentUser = null;
+      const CurrentUser = {
+        result: {
+        email: "abzxy50312@gmail.com",
+        joinedOn: "2222-07-15T09:57:23.489Z",
+    },
+  };
+
+//const CurrentUser = useSelector(state => state.currentUserReducer)
 console.log(CurrentUser)
 
 useEffect(()=>{
@@ -44,6 +47,7 @@ const onFailure = (response) =>{
     console.log("Failed",response)
 }
   return (
+    <>
     <div className='Container_Navbar'>
         <div className="Burger_Logo_Navbar">
             <div className='burger' onClick={()=>toggleDrawer()}>
@@ -73,7 +77,7 @@ const onFailure = (response) =>{
         <div className="Auth_Cont_Navbar">
             {CurrentUser ? (
                 <>
-                <div className="Chanel_logo_App">
+                <div className="Chanel_logo_App" onClick={()=>setAuthBtn(true)}>
                     <p className='fstChar_logo_App'>
                         {CurrentUser?.result.name ? (
                             <>{CurrentUser?.result.name.charAt(0).toUpperCase()}</>
@@ -85,7 +89,7 @@ const onFailure = (response) =>{
                 </>
             ) : (
                 <>
-                <GoogleLogin clientId="248374223563-bv9tmktrv3pfgtfi3pt7hpb2bkg14eep.apps.googleusercontent.com" 
+                <GoogleLogin clientId={"248374223563-bv9tmktrv3pfgtfi3pt7hpb2bkg14eep.apps.googleusercontent.com"}
                 onSuccess={onSuccess} onFailure={onFailure}
                 render = {(renderProps) => (
                     <p className="Auth_btn" onClick={renderProps.onClick}>
@@ -100,6 +104,13 @@ const onFailure = (response) =>{
             
         </div>
     </div>
+    {
+        AuthBtn &&
+        <Auth 
+        setAuthBtn={setAuthBtn}
+        User={CurrentUser}/>
+    }
+    </>
   )
 }
 
