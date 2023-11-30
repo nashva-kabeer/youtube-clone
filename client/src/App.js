@@ -3,9 +3,20 @@ import './App.css';
 import {BrowserRouter as Router} from "react-router-dom";
 import AllRoutes from "./components/navbar/AllRoutes";
 import DrawerSidebar from "./components/LeftSidebar/DrawerSidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CreateEditChanel from "./pages/Chanel/CreateEditChanel";
+import { useDispatch } from "react-redux";
+import { fetchAllChanel } from "./actions/chanelUser";
 
 function App() {
+  
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchAllChanel());
+  }, [dispatch])
+  
+
+
   const [toggleDrawerSidebar,setToggleDrawerSidebar] = useState({
     display:"none",
   })
@@ -20,19 +31,28 @@ function App() {
       })
     }
   }
+
+ const [EditCreateChanelBtn, setEditCreateChanelBtn] = useState(false)
+
+
   return (
     <>
     <Router>
-    <Nav
-    toggleDrawer={toggleDrawer}
-    />
-    
-      <DrawerSidebar
+      {
+        EditCreateChanelBtn &&
+        <CreateEditChanel setEditCreateChanelBtn={setEditCreateChanelBtn}/>
+      }
+      <Nav
+      setEditCreateChanelBtn={setEditCreateChanelBtn}
       toggleDrawer={toggleDrawer}
-      toggleDrawerSidebar={toggleDrawerSidebar}
       />
-    
-    <AllRoutes/>
+      
+        <DrawerSidebar
+        toggleDrawer={toggleDrawer}
+        toggleDrawerSidebar={toggleDrawerSidebar}
+        />
+      
+      <AllRoutes setEditCreateChanelBtn={setEditCreateChanelBtn}/>
     </Router>
     </>
   );

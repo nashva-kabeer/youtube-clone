@@ -1,11 +1,12 @@
 import React from 'react';
 import { GoogleLogout} from 'react-google-login';
+import { Link } from 'react-router-dom';
 import './Auth.css';
 import { BiLogOut } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../../actions/currentUser';
 
-function Auth({User,setAuthBtn}) {
+function Auth({User,setAuthBtn,setEditCreateChanelBtn}) {
     const dispatch = useDispatch();
     const onLogoutSuccess = () => {
         dispatch(setCurrentUser(null));
@@ -30,7 +31,17 @@ function Auth({User,setAuthBtn}) {
                 <div className="email_Auth">{User?.result.email}</div>
             </p>
             <div className="btns_Auth">
-                <input type="submit" className='btn_Auth' value="Create Your Chanel" />
+                {
+                    User?.result.name ? <>
+                    {
+                        <Link to={`chanel/${User?.result._id}`} className='btn_Auth'>
+                            Your Chanel
+                        </Link>
+                    }
+                    </>:<>
+                    <input type="submit" className='btn_Auth' value="Create Your Chanel" onClick={()=>setEditCreateChanelBtn(true)}/>
+                    </>
+                }
                 <div>
                     <GoogleLogout clientId={"248374223563-bv9tmktrv3pfgtfi3pt7hpb2bkg14eep.apps.googleusercontent.com"}
                     onLogoutSuccess={onLogoutSuccess}
