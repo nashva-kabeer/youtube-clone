@@ -1,4 +1,5 @@
 import videoFile from '../models/videoFile.js';
+
 export const uploadVideo = async(req,res,next)=>{
     if(req.file===undefined){
         res.status(404).json({message:"plz Upload a '.mp4' only"})
@@ -18,4 +19,13 @@ export const uploadVideo = async(req,res,next)=>{
         } catch (error) {
             res.status(400).send(error.message)
         }}
+}
+
+export const getAllVideos = async(req,res) => {
+    try {
+        const files = await videoFile.find();
+        res.status(200).send(files);
+    } catch (error) {
+        res.status(404).send(error.message);
+    }
 }

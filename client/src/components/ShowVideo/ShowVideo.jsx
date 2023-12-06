@@ -1,13 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import "./ShowVideo.css";
+import moment from 'moment';
 
 function ShowVideo({vid}) {
   return (
     <>
     <Link to={`/videopage/${vid?._id}`}>
         <video 
-        src={`${vid?.video_src}`}
+        src={`http://localhost:5000/${vid.filePath}`}
         className='video_ShowVideo'
         />
     </Link>
@@ -18,9 +19,9 @@ function ShowVideo({vid}) {
             </div>
         </div>
         <div className="video_details">
-            <p className="title_video_ShowVideo">title</p>
-            <pre className='Vid_Views_UploadTime'>1-1-2022</pre>
-            <pre className='Vid_Views_UploadTime'>5 views <div className="dot"></div> video uploaded 1 year ago</pre>
+            <p className="title_video_ShowVideo">{vid?.videoTitle}</p>
+            <pre className='Vid_Views_UploadTime'>{vid?.createdAt}</pre>
+            <pre className='Vid_Views_UploadTime'>{vid?.views} views <div className="dot"></div> {vid?.uploader} uploaded {moment(vid?.createdAt).fromNow()}</pre>
         </div>
     </div>
     </>

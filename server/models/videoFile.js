@@ -9,7 +9,7 @@ const videoFileSchema = new mongoose.Schema({
     videoChanel: {type: String,required: true},
     like: {type: Number,default: 0},
     views: {type: Number,default: 0},
-    uploder: {type: String}},
+    uploader: {type: String,}},
   {
     timestamps: true,
   });

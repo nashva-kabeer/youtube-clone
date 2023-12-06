@@ -11,3 +11,12 @@ export const uploadVideo =(videoData)=>async(dispatch)=>{
         console.log(error)
     }
 }
+
+export const getAllVideos =()=>async(dispatch)=>{
+    try {
+        const {data} =await api.getVideos();
+        dispatch({type:"FETCH_ALL_VIDEOS",payload:data})
+    } catch (error) {
+        console.log(error)
+    }
+}
