@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import CreateEditChanel from "./pages/Chanel/CreateEditChanel";
 import { useDispatch } from "react-redux";
 import { fetchAllChanel } from "./actions/chanelUser";
+import VideoUpload from "./pages/VideoUpload/VideoUpload";
 
 function App() {
   
@@ -33,11 +34,16 @@ function App() {
   }
 
  const [EditCreateChanelBtn, setEditCreateChanelBtn] = useState(false)
+ const [videoUploadPage, setVideoUploadPage] = useState(false)
 
 
   return (
     <>
     <Router>
+      {
+      videoUploadPage&&
+      <VideoUpload setVideoUploadPage={setVideoUploadPage}/>
+      }
       {
         EditCreateChanelBtn &&
         <CreateEditChanel setEditCreateChanelBtn={setEditCreateChanelBtn}/>
@@ -52,7 +58,7 @@ function App() {
         toggleDrawerSidebar={toggleDrawerSidebar}
         />
       
-      <AllRoutes setEditCreateChanelBtn={setEditCreateChanelBtn}/>
+      <AllRoutes setVideoUploadPage={setVideoUploadPage} setEditCreateChanelBtn={setEditCreateChanelBtn}/>
     </Router>
     </>
   );
