@@ -10,7 +10,7 @@ function VideoPage() {
     const {vid} = useParams();
     const vids = useSelector((state)=>state.videoReducer);
     const vv = vids?.data.filter((q)=> q._id=== vid)[0];
-    const CurrentUser = useSelector(state => state.currentUserReducer)
+    // const CurrentUser = useSelector(state => state.currentUserReducer)
     // const chanels = useSelector(state=>state.chanelReducer)
     // const currentChanel = chanels.filter(c=>c._id===Cid)[0];
   return (
@@ -28,7 +28,7 @@ function VideoPage() {
                         <p className="video_title_videoPage">{vv?.videoTitle}</p>
                         <div className="viewv_date_btn_videoPage">
                             <div className="views_videoPage">{vv?.views} views <div className="dot"></div>{vv?.uploader} uploaded {moment(vv?.createdAt).fromNow()}</div>
-                            <LikeWatchLaterSaveBtns/>
+                            <LikeWatchLaterSaveBtns vv={vv} vid={vid}/>
                         </div>
                     </div>
                 </div>

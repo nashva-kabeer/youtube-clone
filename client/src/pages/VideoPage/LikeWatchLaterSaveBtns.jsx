@@ -4,11 +4,15 @@ import {MdPlaylistAddCheck} from 'react-icons/md';
 import {AiFillDislike,AiOutlineDislike,AiFillLike,AiOutlineLike} from 'react-icons/ai';
 import {RiPlayListAddFill,RiHeartAddFill,RiShareForwardFill} from 'react-icons/ri';
 import './LikeWatchLaterSaveBtns.css';
+import { useDispatch } from 'react-redux';
+import {likeVideo} from '../../actions/video'
 
-function LikeWatchLaterSaveBtns() {
+function LikeWatchLaterSaveBtns({vv,vid}) {
     const [saveVideo,setSaveVideo] = useState(false)
     const [likeBtn, setLikeBtn] = useState(false)
     const [dislikeBtn, setDislikeBtn] = useState(false)
+
+    const dispatch = useDispatch()
 
     const toggleSaveVideo = () => {
         if(saveVideo){
@@ -17,18 +21,34 @@ function LikeWatchLaterSaveBtns() {
             setSaveVideo(true)
         }
     }
-    const toggleLikeBtn = () => {
+    const toggleLikeBtn = (e,lk) => {
         if(likeBtn){
-            setLikeBtn(false)
+            setLikeBtn(false);
+            dispatch(likeVideo({
+                id:vid,Like: lk - 1,
+            })
+            );
         }else{
-            setLikeBtn(true)
+            setLikeBtn(true);
+            dispatch(likeVideo({
+                id:vid,Like: lk + 1,
+            })
+            );
+            setDislikeBtn(false);
         }
     }
-    const toggleDislikeBtn = () => {
+    const toggleDislikeBtn = (e,lk) => {
         if(dislikeBtn){
             setDislikeBtn(false)
         }else{
-            setDislikeBtn(true)
+            setDislikeBtn(true);
+            if(likeBtn){
+                dispatch(likeVideo({
+                    id:vid,Like: lk - 1,
+                })
+                );
+            }
+            setLikeBtn(false)
         }
     }
   return (
@@ -37,7 +57,7 @@ function LikeWatchLaterSaveBtns() {
             <BsThreeDots/>
         </div>
         <div className="btn_videoPage">
-            <div className="like_videoPage" onClick={()=>toggleLikeBtn()}>
+            <div className="like_videoPage" onClick={(e)=>toggleLikeBtn(e,vv?.like)}>
                 {
                     likeBtn ? <>
                     <AiFillLike size={22} className='btns_videoPage'/>
@@ -45,9 +65,9 @@ function LikeWatchLaterSaveBtns() {
                     <AiOutlineLike size={22} className='btns_videoPage'/>
                     </>
                 }
-                <b>1</b>
+                <b>{vv?.like}</b>
             </div>
-            <div className="like_videoPage" onClick={()=>toggleDislikeBtn()}>
+            <div className="like_videoPage" onClick={(e)=>toggleDislikeBtn(e,vv?.like)}>
                 {
                     dislikeBtn ? <>
                     <AiFillDislike size={22} className='btns_videoPage'/>

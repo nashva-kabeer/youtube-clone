@@ -15,7 +15,7 @@ function ShowVideo({vid}) {
     <div className="video_description">
         <div className="Chanel_logo_App">
             <div className="fstChar_logo_App">
-                <>{vid?.Uploader?.charAt(0).toUpperCase()}</>
+                <>{vid?.uploader.charAt(0).toUpperCase()}</>
             </div>
         </div>
         <div className="video_details">
