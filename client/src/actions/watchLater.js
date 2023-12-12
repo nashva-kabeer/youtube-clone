@@ -1,0 +1,21 @@
+import * as api from "../api";
+
+export const addToWatchLater = (watchLaterData) => async(dispatch) => {
+    try{
+        const {data} = await api.addToWatchLater(watchLaterData);
+        dispatch({type:"POST_WATCHLATER",data});
+        dispatch(getAllWatchLater())
+    } catch(error){
+        console.log(error)
+    }
+}
+
+export const getAllWatchLater =()=>async(dispatch)=>{
+    try {
+        const {data} = await api.getAllWatchLater();
+        console.log(data)
+        dispatch({type:"FETCH_ALL_WATCHLATER",payload:data})
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -10,6 +10,7 @@ import { fetchAllChanel } from "./actions/chanelUser";
 import VideoUpload from "./pages/VideoUpload/VideoUpload";
 import { getAllVideos } from "./actions/video";
 import { getAllLikedVideos } from "./actions/likedVideo";
+import { getAllWatchLater } from "./actions/watchLater";
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
     dispatch(fetchAllChanel());
     dispatch(getAllVideos());
     dispatch(getAllLikedVideos());
+    dispatch(getAllWatchLater());
   }, [dispatch])
   
 

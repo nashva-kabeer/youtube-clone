@@ -12,7 +12,7 @@ export const addToLikedVideo = (likedVideoData) => async(dispatch) => {
 
 export const getAllLikedVideos =()=>async(dispatch)=>{
     try {
-        const {data} =await api.getAllLikedVideos();
+        const {data} = await api.getAllLikedVideos();
         dispatch({type:"FETCH_ALL_LIKEDVIDEOS",payload:data})
     } catch (error) {
         console.log(error)

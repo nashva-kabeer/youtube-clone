@@ -6,7 +6,8 @@ import {RiPlayListAddFill,RiHeartAddFill,RiShareForwardFill} from 'react-icons/r
 import './LikeWatchLaterSaveBtns.css';
 import { useDispatch , useSelector} from 'react-redux';
 import {likeVideo} from '../../actions/video'
-import { addToLikedVideo } from '../../api';
+import { addToLikedVideo } from '../../actions/likedVideo';
+import { addToWatchLater } from '../../actions/watchLater';
 
 function LikeWatchLaterSaveBtns({vv,vid}) {
     const CurrentUser = useSelector(state => state.currentUserReducer)
@@ -25,10 +26,18 @@ function LikeWatchLaterSaveBtns({vv,vid}) {
     const dispatch = useDispatch()
 
     const toggleSaveVideo = () => {
-        if(saveVideo){
-            setSaveVideo(false)
+        if(CurrentUser){
+            if(saveVideo){
+                setSaveVideo(false);
+            }else{
+                setSaveVideo(true);
+                dispatch(addToWatchLater({
+                    videoId:vid,
+                    viewer:CurrentUser?.result._id,
+                }))
+            }
         }else{
-            setSaveVideo(true)
+            alert('pls login to continue.')
         }
     }
     const toggleLikeBtn = (e,lk) => {
