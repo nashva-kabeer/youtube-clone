@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { fetchAllChanel } from "./actions/chanelUser";
 import VideoUpload from "./pages/VideoUpload/VideoUpload";
 import { getAllVideos } from "./actions/video";
+import { getAllLikedVideos } from "./actions/likedVideo";
 
 function App() {
   
@@ -16,6 +17,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchAllChanel());
     dispatch(getAllVideos());
+    dispatch(getAllLikedVideos());
   }, [dispatch])
   
 

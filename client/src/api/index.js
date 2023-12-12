@@ -16,7 +16,10 @@ export const fetchAllChanel = () =>API.get('/user/getAllChanels');
 
 export const uploadVideo = (fileData,fileOptions) => API.post('/video/uploadvideo',fileData,fileOptions);
 
-export const getVideos = () => API.get('/video/getvideos')
-;
+export const getVideos = () => API.get('/video/getvideos');
 
 export const likeVideo = (id,Like) => API.patch(`/video/like/${id}`,{Like})
+
+export const addToLikedVideo = (likedVideoData) => API.post('/video/likedvideo',likedVideoData);
+
+export const getAllLikedVideos = () => API.get('/video/getalllikedvideos');

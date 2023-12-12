@@ -1,8 +1,10 @@
 import React from 'react';
 import vid from '../../components/Video/vid.mp4';
-import WHL from '../WatchHistory/WHL';
+import WHL from '../../components/WHL/WHL';
+import { useSelector } from 'react-redux';
 
 function LikedVideo() {
+  const likedVideoList = useSelector(state=>state.likedVideoReducer)
   const likedVideo = [
     {
       _id: 1,
@@ -38,7 +40,7 @@ function LikedVideo() {
     },
   ];
   return (
-    <WHL page={"Liked Video"} videoList={likedVideo}/>
+    <WHL page={"Liked Video"} videoList={likedVideoList}/>
   )
 }
 

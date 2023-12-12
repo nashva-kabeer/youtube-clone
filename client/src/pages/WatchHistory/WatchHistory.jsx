@@ -1,6 +1,6 @@
 import React from 'react';
 import vid from '../../components/Video/vid.mp4'
-import WHL from './WHL';
+import WHL from '../../components/WHL/WHL.css';
 
 function WatchHistory() {
   const history = [

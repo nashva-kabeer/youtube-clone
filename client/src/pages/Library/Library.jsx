@@ -5,7 +5,7 @@ import vid from '../../components/Video/vid.mp4';
 import {FaHistory} from 'react-icons/fa';
 import {MdOutlineWatchLater} from 'react-icons/md';
 import {AiOutlineLike} from 'react-icons/ai';
-import WHLVideoList from '../WatchHistory/WHLVideoList'
+import WHLVideoList from '../../components/WHL/WHLVideoList'
  
 function Library() {
   const vids = [
