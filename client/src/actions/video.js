@@ -33,3 +33,14 @@ export const likeVideo = (likeData) => async(dispatch) => {
     }
 }
 
+export const viewVideo = (viewData) => async(dispatch) => {
+    try {
+        const {id} = viewData;
+        const {data} = await api.viewVideo(id)
+        dispatch({type:'POST_VIEWS',data})
+        dispatch(getAllVideos())
+    } catch (error) {
+        console.log(error)
+    }
+}
+

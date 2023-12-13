@@ -22,3 +22,16 @@ export const getAllLikedVideosController = async(req,res) =>{
         res.status(404).send(error.message);
     }
 }
+
+export const deleteLikedVideoController = async(req,res)=>{
+    const {videoId:videoId,viewer:viewer} = req.params;
+    // console.log(videoId,viewer)
+    try {
+        await likedVideo.findOneAndDelete({
+            videoId: videoId, viewer:viewer,
+        })
+        res.status(200).json({message:"Removed from watchlater"})
+    } catch (error) {
+        res.status(400).json({message:error.message})
+    }
+}

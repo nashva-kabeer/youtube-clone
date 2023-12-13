@@ -6,7 +6,7 @@ import {RiPlayListAddFill,RiHeartAddFill,RiShareForwardFill} from 'react-icons/r
 import './LikeWatchLaterSaveBtns.css';
 import { useDispatch , useSelector} from 'react-redux';
 import {likeVideo} from '../../actions/video'
-import { addToLikedVideo } from '../../actions/likedVideo';
+import { addToLikedVideo, deleteLikedVideo } from '../../actions/likedVideo';
 import { addToWatchLater, deleteWatchLater } from '../../actions/watchLater';
 
 function LikeWatchLaterSaveBtns({vv,vid}) {
@@ -57,6 +57,10 @@ function LikeWatchLaterSaveBtns({vv,vid}) {
                     id:vid,Like: lk - 1,
                 })
                 );
+                dispatch(deleteLikedVideo({
+                    videoId:vid,
+                    viewer:CurrentUser?.result._id,
+                }))
             }else{
                 setLikeBtn(true);
                 dispatch(likeVideo({
@@ -84,6 +88,10 @@ function LikeWatchLaterSaveBtns({vv,vid}) {
                         id:vid,Like: lk - 1,
                     })
                     );
+                    dispatch(deleteLikedVideo({
+                        videoId:vid,
+                        viewer:CurrentUser?.result._id,
+                    }))
                 }
                 setLikeBtn(false)
             }

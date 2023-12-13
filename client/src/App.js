@@ -11,6 +11,7 @@ import VideoUpload from "./pages/VideoUpload/VideoUpload";
 import { getAllVideos } from "./actions/video";
 import { getAllLikedVideos } from "./actions/likedVideo";
 import { getAllWatchLater } from "./actions/watchLater";
+import { getAllHistory } from "./actions/history";
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
     dispatch(getAllVideos());
     dispatch(getAllLikedVideos());
     dispatch(getAllWatchLater());
+    dispatch(getAllHistory());
   }, [dispatch])
   
 

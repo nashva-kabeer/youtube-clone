@@ -20,12 +20,24 @@ export const getVideos = () => API.get('/video/getvideos');
 
 export const likeVideo = (id,Like) => API.patch(`/video/like/${id}`,{Like})
 
+export const viewVideo = (id) =>API.patch(`/video/view/${id}`)
+
 export const addToLikedVideo = (likedVideoData) => API.post('/video/likedvideo',likedVideoData);
 
 export const getAllLikedVideos = () => API.get('/video/getalllikedvideos');
+
+export const deleteLikedVideo = (videoId,viewer) => API.delete(`/video/deletelikedvideo/${videoId}/${viewer}`);
 
 export const addToWatchLater = (watchLaterData) => API.post('/video/watchlater',watchLaterData);
 
 export const getAllWatchLater = () => API.get('/video/getallwatchlater');
 
 export const deleteWatchLater = (videoId,viewer) => API.delete(`/video/deletewatchlater/${videoId}/${viewer}`);
+
+export const addToHistory = (HistoryData) => API.post('/video/history',HistoryData);
+
+export const getAllHistory = () => API.get('/video/getallhistory');
+
+export const clearHistory = (userId) => API.delete(`/video/clearhistory/${userId}`);
+
+
