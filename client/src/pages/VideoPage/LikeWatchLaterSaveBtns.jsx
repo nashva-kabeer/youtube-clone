@@ -7,7 +7,7 @@ import './LikeWatchLaterSaveBtns.css';
 import { useDispatch , useSelector} from 'react-redux';
 import {likeVideo} from '../../actions/video'
 import { addToLikedVideo } from '../../actions/likedVideo';
-import { addToWatchLater } from '../../actions/watchLater';
+import { addToWatchLater, deleteWatchLater } from '../../actions/watchLater';
 
 function LikeWatchLaterSaveBtns({vv,vid}) {
     const CurrentUser = useSelector(state => state.currentUserReducer)
@@ -17,9 +17,14 @@ function LikeWatchLaterSaveBtns({vv,vid}) {
 
     const likedVideoList = useSelector(state=>state.likedVideoReducer)
 
+    const watchLaterList = useSelector(state=>state.watchLaterReducer)
+
+
 
     useEffect(()=>{
         likedVideoList?.data.filter(q=>q?.videoId === vid && q?.viewer === CurrentUser?.result._id).map(m=>setLikeBtn(true))
+
+        watchLaterList?.data.filter(q=>q?.videoId === vid && q?.viewer === CurrentUser?.result._id).map(m=>setSaveVideo(true))
     },[])
 
 
@@ -29,6 +34,10 @@ function LikeWatchLaterSaveBtns({vv,vid}) {
         if(CurrentUser){
             if(saveVideo){
                 setSaveVideo(false);
+                dispatch(deleteWatchLater({
+                    videoId:vid,
+                    viewer:CurrentUser?.result._id, 
+                }));
             }else{
                 setSaveVideo(true);
                 dispatch(addToWatchLater({

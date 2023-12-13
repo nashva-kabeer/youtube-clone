@@ -27,3 +27,5 @@ export const getAllLikedVideos = () => API.get('/video/getalllikedvideos');
 export const addToWatchLater = (watchLaterData) => API.post('/video/watchlater',watchLaterData);
 
 export const getAllWatchLater = () => API.get('/video/getallwatchlater');
+
+export const deleteWatchLater = (videoId,viewer) => API.delete(`/video/deletewatchlater/${videoId}/${viewer}`);

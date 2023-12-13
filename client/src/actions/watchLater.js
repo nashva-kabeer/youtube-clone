@@ -13,8 +13,17 @@ export const addToWatchLater = (watchLaterData) => async(dispatch) => {
 export const getAllWatchLater =()=>async(dispatch)=>{
     try {
         const {data} = await api.getAllWatchLater();
-        console.log(data)
         dispatch({type:"FETCH_ALL_WATCHLATER",payload:data})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteWatchLater = (watchLaterData) => async(dispatch)=>{
+    try {
+        const {videoId,viewer} = watchLaterData;
+        await api.deleteWatchLater(videoId,viewer);
+        dispatch(getAllWatchLater());
     } catch (error) {
         console.log(error)
     }
