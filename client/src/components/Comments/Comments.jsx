@@ -2,24 +2,44 @@ import React from 'react';
 import { useState } from 'react';
 import './comments.css';
 import DisplayComments from './DisplayComments';
+import {useSelector,useDispatch} from 'react-redux';
+import { postComment } from '../../actions/comment';
 
-function Comments() {
+function Comments({videoId}) {
     const [CommentText, setCommentText] = useState("");
 
-    const commentList = [
-        {   _id:1,
-            Commentbody:"hello",
-            userCommented:"abc"
-        },
-        {   
-            _id:2,
-            Commentbody:"heii",
-            userCommented:"bcd"
-        },
-    ];
-
+    const CurrentUser = useSelector(state => state.currentUserReducer)
+    const commentList = useSelector(state=>state.commentReducer)
+    // const commentList = [
+    //     {   _id:1,
+    //         Commentbody:"hello",
+    //         userCommented:"abc"
+    //     },
+    //     {   
+    //         _id:2,
+    //         Commentbody:"heii",
+    //         userCommented:"bcd"
+    //     },
+    // ];
+    const dispatch = useDispatch();
     const handleOnSubmit = (e) => {
         e.preventDefault();
+        if(CurrentUser){
+            if(!CommentText){
+                alert('plz type your comment ! ')
+            }else{
+                dispatch(postComment({
+                    videoId:videoId,
+                    userId:CurrentUser?.result._id,
+                    commentBody: CommentText,
+                    userCommented:CurrentUser?.result.name,
+                }));
+                setCommentText("");
+            }
+        }else{
+            alert('plz login to post comments!')
+        }
+            
     }
   return (
     <>
@@ -29,12 +49,14 @@ function Comments() {
     </form>
     <div className="display_comment_container">
         {
-            commentList.map(m=>{
+            commentList?.data?.filter((q)=> videoId === q?.videoId).reverse().map(m=>{
                 return(
                     <>
                     <DisplayComments
-                    ctId={m._id}
-                    CommentBody={m.Commentbody}
+                    cId={m._id}
+                    userId={m.userId}
+                    commentBody={m.commentBody}
+                    commentOn={m.commentOn}
                     userCommented={m.userCommented}
                     />
                     </>

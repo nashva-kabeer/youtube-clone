@@ -1,17 +1,40 @@
 import React , {useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteComment, editComment } from '../../actions/comment';
+import moment from 'moment';
+import {useSelector} from 'react-redux';
 
-function DisplayComments({ctId,CommentBody,userCommented}) {
+function DisplayComments({cId,commentBody,userId,commentOn,userCommented}) {
+
+    const CurrentUser = useSelector(state => state.currentUserReducer)
+
     const [Edit, setEdit] = useState(false)
     const [CommentBdy, setCommentBdy] = useState("");
+    const [cmtId, setcmtId] = useState("")
 
-    const handleEdit = (ctId,ctBdy) =>{
+    const handleEdit = (ctId,commentBody) =>{
         setEdit(true);
-        setCommentBdy(ctBdy);
+        setcmtId(ctId);
+        setCommentBdy(commentBody);
     }
 
+    const dispatch = useDispatch();
     const handleOnSubmit = (e) => {
         e.preventDefault();
+        if(!CommentBdy){
+            alert("Type your comments")
+        }else{
+            dispatch(editComment({
+                id:cmtId,
+                commentBody:CommentBdy
+            }))
+            setCommentBdy("")
+        }
         setEdit(false);
+    };
+    
+    const handleDeleteComment = (id) =>{
+        dispatch(deleteComment(id))
     }
 
   return (
@@ -22,14 +45,18 @@ function DisplayComments({ctId,CommentBody,userCommented}) {
         <input type='submit' value="Change" className='comment_add_btn_comments'/>
         </form>
         </>:<>
-        <p className="comment_body">{CommentBdy}</p>
+        <p className="comment_body">{commentBody}</p>
         </>
     }
-    <p className="user_commented">- {userCommented} commented</p>
-    <p className="EditDel_Display_Comment">
-        <i onClick={()=>handleEdit(ctId,CommentBody)}>Edit</i>
-        <i>Delete</i>
-    </p>
+    <p className="user_commented">- {userCommented} commented {moment(commentOn).fromNow()}</p>
+    {
+        CurrentUser?.result._id === userId &&(
+        <p className="EditDel_Display_Comment">
+            <i onClick={()=>handleEdit(cId,commentBody)}>Edit</i>
+            <i onClick={()=>handleDeleteComment(cId)}>Delete</i>
+        </p>
+        )
+    }
     </>
   )
 }

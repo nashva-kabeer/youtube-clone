@@ -40,4 +40,12 @@ export const getAllHistory = () => API.get('/video/getallhistory');
 
 export const clearHistory = (userId) => API.delete(`/video/clearhistory/${userId}`);
 
+export const postComment = (commentData) => API.post('/comment/post',commentData);
+
+export const editComment = (id,commentBody) => API.patch(`/comment/edit/${id}`,{commentBody});
+
+export const getAllComment = () => API.get('/comment/get');
+
+export const deleteComment = (id) => API.delete(`/comment/deletecomment/${id}`);
+
 
