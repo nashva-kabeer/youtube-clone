@@ -8,7 +8,6 @@ export const historyController = async(req,res) =>{
     try {
         await addToHistory.save();
         res.status(200).json('added to watchlater')
-        // console.log('done')
     } catch (error) {
         res.status(400).json(error)
     }
@@ -25,7 +24,7 @@ export const getAllHistoryController = async(req,res) =>{
 
 export const claerHistoryController = async(req,res)=>{
     const {userId:userId} = req.params;
-    console.log(userId)
+    // console.log(userId)
     try {
         await history.deleteMany({
             viewer:userId

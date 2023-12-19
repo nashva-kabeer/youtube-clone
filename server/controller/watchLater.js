@@ -8,7 +8,6 @@ export const watchLaterController = async(req,res) =>{
     try {
         await addToWatchLater.save();
         res.status(200).json('added to watchlater')
-        // console.log('done')
     } catch (error) {
         res.status(400).json(error)
     }

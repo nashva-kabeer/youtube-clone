@@ -4,7 +4,7 @@ import users from '../models/auth.js';
 export const updateChanelData = async(req,res)=>{
     const {id:_id} = req.params;
     const {name,desc} = req.body;
-    console.log(req.body)
+    // console.log(req.body)
     if(!mongoose.Types.ObjectId.isValid(_id)){
         return res.status(404).send("Chanel Unavailable..")
     }

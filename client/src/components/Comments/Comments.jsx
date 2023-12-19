@@ -10,17 +10,6 @@ function Comments({videoId}) {
 
     const CurrentUser = useSelector(state => state.currentUserReducer)
     const commentList = useSelector(state=>state.commentReducer)
-    // const commentList = [
-    //     {   _id:1,
-    //         Commentbody:"hello",
-    //         userCommented:"abc"
-    //     },
-    //     {   
-    //         _id:2,
-    //         Commentbody:"heii",
-    //         userCommented:"bcd"
-    //     },
-    // ];
     const dispatch = useDispatch();
     const handleOnSubmit = (e) => {
         e.preventDefault();

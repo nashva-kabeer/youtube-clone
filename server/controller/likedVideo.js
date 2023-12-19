@@ -8,7 +8,6 @@ export const likedVideoController = async(req,res) =>{
     try {
         await addToLikedVideo.save();
         res.status(200).json('added to likedvideo')
-        //console.log('done')
     } catch (error) {
         res.status(400).json(error)
     }

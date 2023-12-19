@@ -14,16 +14,9 @@ import Auth from '../../pages/Auth/Auth';
 function Nav({toggleDrawer,setEditCreateChanelBtn}) {
 
     const [AuthBtn, setAuthBtn] = useState(false)
-    //const CurrentUser = null;
-//       const CurrentUser = {
-//         result: {
-//         email: "abzxy50312@gmail.com",
-//         joinedOn: "2222-07-15T09:57:23.489Z",
-//     },
-//   };
 
-const CurrentUser = useSelector(state => state.currentUserReducer)
-// console.log(CurrentUser)
+    const CurrentUser = useSelector(state => state.currentUserReducer)
+    // console.log(CurrentUser)
 
 useEffect(()=>{
     function start (){

@@ -5,8 +5,8 @@ import LikeWatchLaterSaveBtns from './LikeWatchLaterSaveBtns';
 import Comments from '../../components/Comments/Comments';
 import { useParams,Link } from 'react-router-dom';
 import { useSelector ,useDispatch } from 'react-redux';
-import { addToHistory } from '../../actions/history';
-import { viewVideo } from '../../actions/video';
+import { addToHistory } from '../../actions/history.js';
+import { viewVideo } from '../../actions/video.js';
 
 function VideoPage() {
     const {vid} = useParams();
@@ -30,8 +30,6 @@ function VideoPage() {
             id:vid
         }))
     }
-    // const chanels = useSelector(state=>state.chanelReducer)
-    // const currentChanel = chanels.filter(c=>c._id===Cid)[0];
     useEffect(()=>{
         if(CurrentUser){
             handleHistory();

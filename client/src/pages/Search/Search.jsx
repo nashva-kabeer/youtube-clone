@@ -1,5 +1,4 @@
 import React from 'react';
-// import './Search.css';
 import LeftSidebar from '../../components/LeftSidebar/LeftSidebar';
 import ShowVideoGrid from '../../components/ShowVideoGrid/ShowVideoGrid';
 import {useSelector} from 'react-redux';
